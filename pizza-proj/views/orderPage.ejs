@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Pizza</title>
+  <style>
+    table {
+      margin: 30px auto 0;
+      width: 250px;
+      text-align: center;
+    }
+
+    table td, table th {
+      padding: 20px;
+      margin: 0;
+    }
+
+    .tsize, .tcrust, .ttoppings {
+      border: 6px solid palegoldenrod;
+    }
+
+    .ttoppings {
+      width: 95%;
+    }
+
+    .firstTables {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .tsize td, .tcrust td, .ttoppings td {
+      padding: 10px;
+    }
+
+    .tsize th, .tcrust th, .ttoppings th, .tcustomer th {
+      background-color: palegoldenrod;
+      text-transform: uppercase;
+      font-size: 20px;
+    }
+
+    .ttoptions {
+      width: 235px;
+      text-align: left;
+      margin: 10px;
+      border: 3px solid #C12127;
+    }
+
+    .ttoptions td[rowspan] {
+      background-color: #C12127;
+      color: white;
+    }
+
+    .divtoppings {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .tcustomer {
+      width: 80%;
+      border: 3px solid #008CBA;;
+    }
+
+    .tcustomer th {
+      background-color: #008CBA;
+    }
+
+    header {
+      background-color: #8bc34a;
+      border: 0px;
+      margin: 0px;
+      padding: 40px 30%;
+      border-radius: 0px;
+      text-transform: uppercase;
+      color: white;
+      font-size: 30px;
+    }
+
+    h3 {
+      font-weight: 100;
+      font-size: 35px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 20px 30px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 20px;
+      margin: 30px 34%;
+      width: 400px;
+    }
+
+    .divbtn {
+      width: 100%;
+    }
+
+    .form-control {
+      display: block;
+      width: 300px;
+      height: 20px;
+      padding: 6px 10px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+    }
+  </style>
+  <script>
+    window.onload = function() {
+
+      document.querySelectorAll('[name=optSizes]')[0].checked = true;
+      document.querySelectorAll('[name=optCrust]')[0].checked = true;
+
+    }
+
+  </script>
+</head>
+<body>
+  <header>
+    CREATE YOUR OWN PIZZA
+  </header>
+
+  <form method="post" action="/">
+
+    <div class="firstTables">
+      <table class="tsize">
+          <tr> <th colspan="2"> Size </th> </tr>
+        <% for(var i=0; i < sizes.length; i++) {%>
+           <tr>
+             <td><%= sizes[i].type %></td>
+             <td><input type="radio" name="optSizes" value='<%= sizes[i].type %>' required> <%= sizes[i].price %></td>
+           </tr>
+        <% } %>
+      </table>
+
+      <table class="tcrust">
+        <tr> <th colspan="2"> Crust (FREE) </th> </tr>
+        <% for(var i=0; i < crust.length; i++) {%>
+           <tr>
+             <td><input type="radio" name="optCrust" value='<%= crust[i] %>' required> <%= crust[i] %></td>
+           </tr>
+        <% } %>
+      </table>
+
+      <table class="ttoppings">
+        <tr> <th colspan="<%= sizes.length%>"> Toppings </th> </tr>
+        <tr>
+          <td colspan="4"> Additional:&nbsp;
+            <% for(var i=0; i < sizes.length; i++) {%>
+              <%= sizes[i].type %>: $<%= sizes[i].extraTopping %>&nbsp;&nbsp;&nbsp;
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td class="divtoppings">
+            <% for(var i=0; i < toppings.length; i++) {%>
+              <table class="ttoptions">
+               <tr>
+                 <td rowspan="<%= toppings[i].options.length + 1 %>"><%= toppings[i].type %></td>
+               </tr>
+
+               <% for(var j=0; j < toppings[i].options.length; j++) {%>
+               <tr>
+                 <td>
+                    <input type="checkbox" name="optToppings" value='<%= toppings[i].options[j] %>'> <%= toppings[i].options[j] %> <br>
+                  </td>
+               </tr>
+              <% } %>
+              </table>
+            <% } %>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <table class="tcustomer">
+      <tr> <th colspan="4"> Customer </th> </tr>
+      <tr>
+        <td>Name*</td>
+        <td><input type="text" name="name" class="form-control" maxlength="50" placeholder="full name" required /></td>
+        <td>Phone number*</td>
+        <td><input type="text" name="phoneNumber" class="form-control" maxlength="10" placeholder="phone number" required /></td>
+      </tr>
+      <tr>
+        <td>Address*</td>
+        <td><input type="text" name="address" class="form-control" maxlength="50" placeholder="address" required /></td>
+        <td>City*</td>
+        <td><input type="text" name="city" class="form-control" maxlength="50" placeholder="city" required /></td>
+      </tr>
+      <tr>
+        <td>Province*</td>
+        <td><input type="text" name="province" class="form-control" maxlength="2" required placeholder="XX" /></td>
+        <td>Postal Code*</td>
+        <td> <input type="text" name="postalCode" class="form-control" maxlength="7" placeholder="XXX XXX" required /></td>
+      </tr>
+    </table>
+
+    <div class="divbtn">
+      <button name="addItem" type="submit">ORDER PIZZA</button>
+    </div>
+  </form>
+
+
+</body>
+</html>

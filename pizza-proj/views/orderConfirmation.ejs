@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Order Confirmation</title>
+  <style>
+    header {
+      background-color: #8bc34a;
+      border: 0px;
+      margin: 0px;
+      padding: 40px 40%;
+      border-radius: 0px;
+      text-transform: uppercase;
+      color: white;
+      font-size: 30px;
+    }
+
+    button {
+      border: none;
+      color: white;
+      padding: 20px 30px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 30px 0;
+    }
+
+    .btnConfirm {
+      background-color: #4CAF50;
+      margin-left: 70%;
+    }
+
+    .btnCancel {
+      background-color: #f44336;
+      margin-left: 20px;
+    }
+
+    .btnNew {
+      background-color: #008CBA;
+      margin: 0 auto;
+    }
+
+    .formMsg {
+      width: 100%;
+    }
+
+    .divbtn {
+      width: 100%;
+    }
+
+    table {
+      margin: 30px auto 0;
+      width: 250px;
+    }
+
+    table td, table th {
+      padding: 20px;
+      margin: 0;
+    }
+
+    form {
+      width: 50%;
+      float: left;
+    }
+
+    .formConfirm {
+
+    }
+
+    .firstTables {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .tsize {
+      border: 6px solid palegoldenrod;
+      width: 40%;
+    }
+
+    .tsize td, .tcustomer td {
+      padding: 10px;
+    }
+
+    .tsize td:first-child, .tcustomer td:first-child {
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .tsize th {
+      background-color: palegoldenrod;
+      text-transform: uppercase;
+      font-size: 20px;
+    }
+
+    .tcustomer {
+      width: 40%;
+      border: 3px solid #008CBA;;
+    }
+
+    .tcustomer th {
+      background-color: #008CBA;
+      text-transform: uppercase;
+      font-size: 20px;
+    }
+
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 500px;
+      height: 250px;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+    }
+
+    /* The Close Button */
+    .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-header {
+      padding: 2px 16px;
+      background-color: #5cb85c;
+      color: white;
+    }
+
+    .modal-body {
+      padding: 2px 16px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+  </style>
+
+  <script>
+    window.onload = function() {
+      // Get the modal
+      var modal = document.getElementById('myModal');
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks on the button, open the modal
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- The Modal -->
+  <div id="myModal" name="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Order Confirmation</h2>
+      </div>
+
+      <div class="modal-body">
+        <p>Thanks for ordering the pizza.</p>
+        <p>It will delivered in 1 hour ( <%= message %> )</p>
+
+        <form method="post" class="formMsg" action="/orderCancel">
+          <button class="btnNew" name="button" >Add other item</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <header>
+   REVIEW ORDER
+  </header>
+
+  <div class="firstTables">
+    <table class="tsize">
+      <tr> <th colspan="2"> Pizza Info </th> </tr>
+      <tr>
+        <td>Size</td>
+        <td><%= size %></td>
+      </tr>
+      <tr>
+        <td>Crust</td>
+        <td><%= crust %></td>
+      </tr>
+      <tr>
+        <td>Toppings</td>
+        <td><%= toppings %></td>
+      </tr>
+
+      <tr>
+        <td>Total price</td>
+        <td>$<%= cost %></td>
+      </tr>
+    </table>
+
+    <table class="tcustomer">
+      <tr> <th colspan="2"> Customer Info </th> </tr>
+      <tr>
+        <td>Name</td>
+        <td><%= name %></td>
+      </tr>
+
+      <tr>
+        <td>Phone number</td>
+        <td><%= phoneNumber %></td>
+      </tr>
+
+      <tr>
+        <td>Address</td>
+        <td><%= address %></td>
+      </tr>
+
+      <tr>
+        <td>City</td>
+        <td><%= city %></td>
+      </tr>
+
+      <tr>
+        <td>Province</td>
+        <td><%= province %></td>
+      </tr>
+
+      <tr>
+        <td>Postal Code</td>
+        <td><%= postalCode %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="divbtn">
+    <form method="post" action="/orderConfirm">
+      <button class="btnConfirm" id="myBtn" type="submit">Confirm Order</button>
+    </form>
+
+    <form method="post" action="/orderCancel">
+      <button class="btnCancel" name="button" >Cancel Order</button>
+    </form>
+  </div>
+
+</body>
+</html>

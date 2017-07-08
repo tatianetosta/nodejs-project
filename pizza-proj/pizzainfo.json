@@ -1,0 +1,50 @@
+{
+  "sizes": [
+    {
+      "type": "Small",
+      "price": "10.43",
+      "extraTopping": "0.95"
+    },
+    {
+      "type": "Medium",
+      "price": "17.09",
+      "extraTopping": "1.43"
+    },
+    {
+      "type": "Large",
+      "price": "19.00",
+      "extraTopping": "1.67"
+    },
+    {
+      "type": "XLarge",
+      "price": "21.86",
+      "extraTopping": "2.14"
+    }
+  ],
+  "crust": [
+    "Regular", "Thin", "Gluten Free"
+  ],
+  "toppings": [
+    {
+      "type": "Cheese",
+      "options": ["Mozzarella", "Cheddar", "Feta", "Provolone", "Gouda", "Parmesan"]
+    },
+    {
+      "type": "Sauce",
+      "options": ["Tomato Sauce", "Ranch", "Pesto",
+                  "BBQ", "Chipotle", "Garlic"]
+    },
+    {
+      "type": "Meat",
+      "options": ["Bacon", "Ham", "Pepperoni",
+                  "Grilled Chicken", "Italian Sausage",
+                  "Ground Beef"]
+    },
+    {
+      "type": "Veggie",
+      "options": ["Pineapple", "Red Pepper", "Spinach", "Black Olive",
+                  "Tomato", "Mushroom", "Green Olive",
+                  "Roasted Eggplant", "Chopped Garlic", "Red Onion"]
+    }
+  ]
+}
